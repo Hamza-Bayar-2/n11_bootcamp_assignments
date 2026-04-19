@@ -6,6 +6,8 @@ This repository contains the assignments and projects completed during the n11 B
 Bir ödeme ekranı uygulamasında çalıştığınızı düşünün. Mevcut sistemde hali hazırda bazı ödeme yöntemleri bulunmaktadır.
 Yeni bir ödeme yöntemi sisteme eklenecektir. Bu entegrasyonu gerçekleştirirken aşağıdaki gereksinimleri dikkate almanız beklenmektedir:
 
+- **Proje Klasörü**: [(payment_method_implementation)](payment_method_implementation)
+
 ### 📌 Beklentiler
 - Mevcut kod yapısını mümkün olduğunca **bozmadan** ilerleyin.
 - Yeni ödeme yöntemini **SOLID yazılım prensiplerine uygun** şekilde sisteme entegre edin.
