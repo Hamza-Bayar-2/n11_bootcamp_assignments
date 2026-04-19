@@ -5,4 +5,5 @@ public class PaymentRequest {
     public double amount;
     public String method;
     public String description;
+    public String payerName;
 }

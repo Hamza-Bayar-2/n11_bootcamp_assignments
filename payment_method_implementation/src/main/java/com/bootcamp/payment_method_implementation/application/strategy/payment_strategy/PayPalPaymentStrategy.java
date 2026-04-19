@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("paypal")
 public class PayPalPaymentStrategy implements IPaymentStrategy {
     @Override
-    public String processPayment() {
-        return "PayPal ile ödeme işlemi gerçekleştirildi.";
+    public String processPayment(double amount, String payerName) {
+        return payerName + " tarafından PayPal ile " + amount + " tutarında ödeme işlemi gerçekleştirildi.";
     }
 }

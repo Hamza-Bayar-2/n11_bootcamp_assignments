@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 public class IbanPaymentStrategy implements IPaymentStrategy {
 
     @Override
-    public String processPayment() {
-        return "Iban ile ödeme işlemi gerçekleştirildi.";
+    public String processPayment(double amount, String payerName) {
+        return payerName + " tarafından Iban ile " + amount + " tutarında ödeme işlemi gerçekleştirildi.";
     }
 
 }

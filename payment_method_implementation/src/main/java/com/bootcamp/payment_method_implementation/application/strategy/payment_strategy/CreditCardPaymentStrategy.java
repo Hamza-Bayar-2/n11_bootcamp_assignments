@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("card")
 public class CreditCardPaymentStrategy implements IPaymentStrategy {
     @Override
-    public String processPayment() {
-        return "Kredi Kartı ile ödeme işlemi gerçekleştirildi.";
+    public String processPayment(double amount, String payerName) {
+        return payerName + " tarafından Kredi Kartı ile " + amount + " tutarında ödeme işlemi gerçekleştirildi.";
     }
 }

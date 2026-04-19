@@ -1,5 +1,5 @@
 package com.bootcamp.payment_method_implementation.application.service;
-
+import com.bootcamp.payment_method_implementation.application.dto.PaymentRequestDto;
 import com.bootcamp.payment_method_implementation.application.factory.PaymentStrategyFactory;
 import com.bootcamp.payment_method_implementation.application.strategy.payment_strategy.IPaymentStrategy;
 import com.bootcamp.payment_method_implementation.common.Result;
@@ -17,14 +17,14 @@ public class PaymentService {
         this.paymentStrategyFactory = paymentStrategyFactory;
     }
 
-    public Result<String> processPayment(String method) {
-        var strategyResult = paymentStrategyFactory.getStrategy(method);
+    public Result<String> processPayment(PaymentRequestDto requestDto) {
+        var strategyResult = paymentStrategyFactory.getStrategy(requestDto.method());
 
         if (!strategyResult.isSuccess())
             return Result.failure(strategyResult.errorMessage());
 
         IPaymentStrategy strategy = strategyResult.data();
-        String message = strategy.processPayment();
+        String message = strategy.processPayment(requestDto.amount(), requestDto.payerName());
 
         return Result.success(message);
     }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("google")
 public class GooglePayPaymentStrategy implements IPaymentStrategy {
     @Override
-    public String processPayment() {
-        return "Google Pay ile ödeme işlemi gerçekleştirildi.";
+    public String processPayment(double amount, String payerName) {
+        return payerName + " tarafından Google Pay ile " + amount + " tutarında ödeme işlemi gerçekleştirildi.";
     }
 }
