@@ -10,6 +10,36 @@ Proje, sorumlulukların ayrılması (Separation of Concerns) prensibiyle yapıla
 - **domain:** Temel modellerin ve strateji arayüzlerinin (Interface) bulunduğu çekirdek katman.
 - **common:** Tüm uygulama genelinde kullanılan ortak yapılar (Result Pattern).
 
+## 🚀 Hızlı Başlangıç
+
+### Projeyi Çalıştırma
+Projeyi çalıştırmak için terminalde projenin kök dizinine gidin ve şu komutu çalıştırın:
+
+```bash
+mvn spring-boot:run
+```
+
+### Örnek API Kullanımı
+
+#### 1. Aktif Ödeme Yöntemlerini Listeleme
+Sistemde kayıtlı olan tüm ödeme yöntemlerini görmek için:
+- **Method:** `GET`
+- **URL:** `http://localhost:8080/api/payments/get-all`
+
+#### 2. Ödeme İşlemi Gerçekleştirme (JSON Body)
+Yeni bir ödeme işlemi başlatmak için `POST` isteği gönderin:
+- **Method:** `POST`
+- **URL:** `http://localhost:8080/api/payments/pay`
+- **Body (raw JSON):**
+```json
+{
+  "amount": 2500.50,
+  "payerName": "Hamza Bayar",
+  "method": "visa",
+  "description": "Bootcamp Kayıt Ücreti"
+}
+```
+
 ## Yeni Ödeme Yöntemi Eklemek
 
 1. `IPaymentStrategy` interface'ini eklenen yeni ödeme yöntemine implemente et
