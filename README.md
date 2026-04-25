@@ -31,6 +31,8 @@ Yeni bir ödeme yöntemi sisteme eklenecektir. Bu entegrasyonu gerçekleştirirk
 
 ## 👉 2. Ödev: Refresh ve JWT Token ile authentication katmanını kurun
 
+- **Proje Klasörü**: [(jwt_and_refresh_token_authentication)](jwt_and_refresh_token_authentication)
+
 ### 📌 Proje Amacı
 
 Bu projede, ders kapsamında işlenen **JWT (JSON Web Token)** konusu ele alınmaktadır.  
