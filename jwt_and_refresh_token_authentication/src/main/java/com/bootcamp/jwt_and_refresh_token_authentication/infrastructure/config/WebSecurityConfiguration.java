@@ -1,4 +1,4 @@
-package com.bootcamp.jwt_and_refresh_token_authentication.config;
+package com.bootcamp.jwt_and_refresh_token_authentication.infrastructure.config;
 
 import com.bootcamp.jwt_and_refresh_token_authentication.application.security.JwtTokenFilter;
 import lombok.RequiredArgsConstructor;
