@@ -42,9 +42,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 // Token içindeki rolleri okuyoruz
                 List<String> roles = jwtService.getUserRolesFromToken(jwt);
                 
-                // Spring Security'nin anlayacağı GrantedAuthority nesnelerine (Spring standardı gereği başlarına ROLE_ eklenir) çeviriyoruz.
+                // Spring Security'nin anlayacağı GrantedAuthority nesnelerine çeviriyoruz.
+                // Eğer roller "ROLE_" öneki ile gelmiyorsa burada ekliyoruz.
                 List<SimpleGrantedAuthority> authorities = roles != null ? 
-                        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList()) 
+                        roles.stream().map(role -> {
+                            String roleName = role.startsWith("ROLE_") ? role : "ROLE_" + role;
+                            return new SimpleGrantedAuthority(roleName);
+                        }).collect(Collectors.toList()) 
                         : List.of();
 
                 // UserDetails nesnesini dinamik yetkilerle oluşturuyoruz

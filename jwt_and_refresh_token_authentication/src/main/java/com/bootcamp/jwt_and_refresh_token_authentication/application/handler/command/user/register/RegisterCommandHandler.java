@@ -49,7 +49,11 @@ public class RegisterCommandHandler {
         UserRole userRole = new UserRole();
         userRole.setRoleType(RoleType.USER);
         userRole.setUser(user);
+        UserRole userRole2 = new UserRole();
+        userRole2.setRoleType(RoleType.ADMIN);
+        userRole2.setUser(user);
         user.getRoles().add(userRole);
+        user.getRoles().add(userRole2);
 
         _userService.save(user);
 
