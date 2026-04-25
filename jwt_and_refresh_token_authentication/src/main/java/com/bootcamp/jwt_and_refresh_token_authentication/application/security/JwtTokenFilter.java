@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -37,8 +39,16 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             String username = jwtService.getUsernameFromToken(jwt);
 
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                // Şimdilik rolleri çekmek için basit UserDetails
-                UserDetails userDetails = new User(username, "", new ArrayList<>());
+                // Token içindeki rolleri okuyoruz
+                List<String> roles = jwtService.getUserRolesFromToken(jwt);
+                
+                // Spring Security'nin anlayacağı GrantedAuthority nesnelerine (Spring standardı gereği başlarına ROLE_ eklenir) çeviriyoruz.
+                List<SimpleGrantedAuthority> authorities = roles != null ? 
+                        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList()) 
+                        : List.of();
+
+                // UserDetails nesnesini dinamik yetkilerle oluşturuyoruz
+                UserDetails userDetails = new User(username, "", authorities);
 
                 UsernamePasswordAuthenticationToken authentication =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());

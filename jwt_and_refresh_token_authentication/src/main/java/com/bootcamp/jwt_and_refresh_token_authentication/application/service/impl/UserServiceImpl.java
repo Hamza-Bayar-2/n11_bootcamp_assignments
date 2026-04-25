@@ -30,6 +30,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByEmail(String email) {
+        return _userRepository.findByEmail(email)
+                .orElse(null);
+    }
+
+    @Override
     @Transactional
     public User save(User user) {
         return _userRepository.save(user);

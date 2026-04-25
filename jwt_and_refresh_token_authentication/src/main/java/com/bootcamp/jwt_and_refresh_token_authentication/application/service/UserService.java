@@ -9,9 +9,11 @@ public interface UserService {
 
     User getById(Long id);
 
-    User save(User project);
+    User getByEmail(String email);
 
-    User update(User project);
+    User save(User user);
+
+    User update(User user);
 
     Boolean delete(Long id);
 
