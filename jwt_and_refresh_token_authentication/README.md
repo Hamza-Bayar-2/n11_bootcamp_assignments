@@ -8,11 +8,19 @@ Bu proje; Spring Boot 3, Spring Security 6 ve JWT (JSON Web Token) kullanarak ge
 - **Güvenli Cookie Yönetimi:** Token'lar `HttpOnly`, `Secure` ve `SameSite=Strict` özellikli cookie'lerde saklanarak XSS ve CSRF saldırılarına karşı korunur.
 - **Token Rotation:** Refresh token her kullanıldığında yenilenerek (rotation) ele geçirilme riskini minimize eder.
 - **Rol Tabanlı Yetkilendirme:** `ADMIN`, `USER` ve `MODERATOR` rolleri ile granular erişim kontrolü sağlanır.
+- **Kesintisiz Oturum (Token Refresh):** JWT Access Token süresi dolduğunda, Refresh Token kullanılarak yeni bir session (Access Token) üretilir. Güvenlik için de Refresh Token rotate edilir
 - **Otomatik Login:** Kayıt (Register) işlemi sonrası kullanıcı login yapmasına gerek kalmadan otomatik olarak sisteme dahil edilir.
 
 ## 🛠️ Mimari Yapı ve Tasarım Desenleri
 
-### 1. CQRS (Command Query Responsibility Segregation)
+### 1. Clean Architecture (Temiz Mimari)
+Proje, bağımlılıkların içe doğru akmasını sağlayan ve iş mantığını (domain) dış dünyadan (database, web, framework) izole eden **Clean Architecture** prensuplarına göre katmanlandırılmıştır:
+- **API Katmanı (`api`):** Controller ve DTO'ların bulunduğu dış dünya ile iletişim katmanı.
+- **Application Katmanı (`application`):** İş kurallarının (Handlers, Services) bulunduğu orkestrasyon katmanı.
+- **Infrastructure Katmanı (`infrastructure`):** Güvenlik yapılandırmaları ve dış kütüphane entegrasyonlarının (Config, Security) bulunduğu katman.
+- **Domain Katmanı (`domain`):** Entity ve repository interface'lerinin bulunduğu çekirdek katman.
+
+### 2. CQRS (Command Query Responsibility Segregation)
 İş mantığı, yazma (Command) ve okuma (Query) işlemleri olarak birbirinden ayrılmıştır. Tüm iş akışı handler sınıfları üzerinden yönetilir.
 
 ### 2. Result Pattern
