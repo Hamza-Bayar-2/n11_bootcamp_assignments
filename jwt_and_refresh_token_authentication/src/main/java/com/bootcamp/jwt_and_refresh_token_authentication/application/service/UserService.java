@@ -17,4 +17,5 @@ public interface UserService {
 
     Boolean delete(Long id);
 
+    void deleteAll();
 }

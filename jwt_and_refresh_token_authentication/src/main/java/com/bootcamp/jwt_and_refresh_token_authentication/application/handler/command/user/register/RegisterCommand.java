@@ -6,20 +6,20 @@ import jakarta.validation.constraints.NotBlank;
 
 @PasswordMatches
 public record RegisterCommand(
-        @NotBlank 
+        @NotBlank(message = "Name is required") 
         String name,
 
-        @NotBlank 
+        @NotBlank(message = "Surname is required") 
         String surname,
 
-        @NotBlank 
-        @Email 
+        @NotBlank(message = "Email is required") 
+        @Email(message = "Invalid email format") 
         String email,
 
-        @NotBlank 
+        @NotBlank(message = "Password is required") 
         String password,
         
-        @NotBlank 
+        @NotBlank(message = "Password confirmation is required") 
         String passwordConfirm
     ) {
 

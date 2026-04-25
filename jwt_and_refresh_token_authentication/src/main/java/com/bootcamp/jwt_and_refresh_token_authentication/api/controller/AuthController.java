@@ -14,6 +14,7 @@ import com.bootcamp.jwt_and_refresh_token_authentication.application.service.Coo
 import com.bootcamp.jwt_and_refresh_token_authentication.domain.Result;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterCommand command) {
+    public ResponseEntity<?> register(@Valid @RequestBody RegisterCommand command) {
         Result<RegisterResultDto> result = _registerCommandHandler.handle(command);
 
         if (!result.isSuccess()) {
@@ -62,7 +63,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginCommand command) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginCommand command) {
         Result<LoginResultDto> result = _loginCommandHandler.handle(command);
 
         if (!result.isSuccess()) {

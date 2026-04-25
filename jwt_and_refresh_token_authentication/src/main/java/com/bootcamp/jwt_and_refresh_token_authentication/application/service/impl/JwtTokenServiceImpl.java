@@ -34,9 +34,9 @@ public class JwtTokenServiceImpl implements AccessTokenService {
     }
 
     @Override
-    public String generateToken(String username, List<String> roles) {
+    public String generateToken(String userEmail, List<String> roles) {
         return Jwts.builder()
-                .setSubject(username)
+                .setSubject(userEmail)
                 .claim("roles", roles)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))

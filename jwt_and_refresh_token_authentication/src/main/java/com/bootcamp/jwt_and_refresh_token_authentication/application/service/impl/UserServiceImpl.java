@@ -61,4 +61,10 @@ public class UserServiceImpl implements UserService {
         return true;
     }
 
+    @Override
+    @Transactional
+    public void deleteAll() {
+        _userRepository.deleteAll();
+    }
+
 }
